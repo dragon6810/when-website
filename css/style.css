@@ -1,4 +1,5 @@
 body{
+    padding-top: 10px;
     background-color:#f4f4f4;
     color:#000000;
     font-family: Helvetica, sans-serif;
@@ -26,10 +27,10 @@ a{
     border:2px rgb(0, 0, 0) solid;
     border-radius: 3px;
     text-align: center;
+    transition: all 250ms cubic-bezier(.25, .8, .25, 1);
 }
 
 .button:hover{
-    background-color: rgb(59, 53, 82);
     font-size: 20px;
     color:#fff;
     padding:5px 7px;
@@ -37,6 +38,7 @@ a{
     border:2px rgb(0, 0, 0) solid;
     border-radius: 5px;
     text-align: center;
+    background-image: linear-gradient(to bottom, #2a1433 0%, #1a0a20 100%);
 }
 
 .flex-box{
@@ -75,8 +77,9 @@ a{
     margin-top: 1%;
     border: 2px rgb(0, 0, 0) solid;
     border-radius: 3px;
-    padding: 5px;
-    text-align: left;
+    text-align: center;
+    align-content: center;
+    overflow: hidden;
 }
 
 .menu-box h1{
@@ -126,6 +129,46 @@ a{
     text-align: center;
 }
 
+.art1-box{
+    width: 25%;
+    height: 50%;
+    background-color: rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+    margin-left: 1%;
+    margin-top: 1%;
+    border: 2px rgb(0, 0, 0) solid;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: left;
+}
+
+.art1-box h1{
+    font-size: 24px;
+    margin:0;
+    width: 100%;
+    text-align: center;
+}
+
+.art2-box{
+    width: 50%;
+    height: 50%;
+    background-color: rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+    margin-left: 1%;
+    margin-top: 1%;
+    border: 2px rgb(0, 0, 0) solid;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: left;
+}
+
+.art2-box h1{
+    font-size: 24px;
+    margin:0;
+    width: 100%;
+    text-align: center;
+}
+
 .tabs-box{
     background-color: rgb(48, 52, 75);
     border-top: 2px rgb(0, 0, 0) solid;
@@ -133,4 +176,28 @@ a{
     color: #f4f4f4;
     text-align: center;
     height: 2%;
+}
+
+#disqus_thread{
+    padding: 10px;
+    border:2px #000;
+}
+
+span {
+    position: absolute;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: animate 1s linear infinite;
+}
+@keyframes animate {
+    0% {
+        width: 0px;
+        height: 0px;
+    }
+    100% {
+        width: 50px;
+        height: 50px;
+    }
 }

@@ -1,15 +1,34 @@
-<!DOCTYPE html>>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>W.H.E.N 6th Grade</title>
+        <title>W.H.E.N. 6th Grade</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
-        <h1>W.H.E.N</h1>
+        <h1>W.H.E.N.</h1>
         <p>Worthington Hooker Everyweek News</p>
     </body>
     <div class="tabs-box">
-        <a class="button" href="polls.html">Polls</a> - <a class="button" href="science.html">Science</a> - <a class="button" href="ss.html">Social Studies</a> - <a class="button" href="math.html">Math</a> - <a class="button" href="ela.html">Reading</a> - <a class="button" href="specials.html">Specials</a> - <a class="button" href="arch.html">Archives</a> - <a class="button" href="games.html">Games</a>
+        <a class="button" href="index.html">Home</a> - <a class="button" href="discuss.html">Discussion</a> - <a class="button" href="polls.html">Polls</a> - <a class="button" href="science.html">Science</a> - <a class="button" href="ss.html">Social Studies</a> - <a class="button" href="math.html">Math</a> - <a class="button" href="ela.html">Reading</a> - <a class="button" href="specials.html">Specials</a> - <a class="button" href="arch.html">Archives</a> - <a class="button" href="games.html">Games</a> - <a class="button" href="#">Test</a>
+        <script type="text/javascript">
+        const buttons = document.querySelectorAll('a');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+
+                let x = e.clientX - e.target.offsetLeft;
+                let y = e.clientY - e.target.offsetTop;
+
+                let ripples = document.createElement('span');
+                ripples.style.left = x + 'px';
+                ripples.style.top = y + 'px';
+                this.appendChild(ripples);
+
+                setTimeout(() => {
+                    ripples.remove();
+                },1000);
+            })
+        })
+        </script>
     </div>
     <div class="flex-box">
         <div class="poll-box">
@@ -17,8 +36,7 @@
         So ye im not really sure whats supposed to go in here but like i saw a pie chart thing so its probably like a poll or something, but ye this is just to see if the GUI with the divs and classes are working properly for the main website hub thing. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar aliquam malesuada. Praesent sit amet elit tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam nulla nisi, cursus eu hendrerit vel, cursus et elit. Curabitur eros tellus, ornare aliquet tempor vel, ultricies a sapien. Donec sit amet lectus convallis, commodo odio non, fringilla odio. Nulla et magna vitae sapien tincidunt mattis vel nec metus. Aliquam laoreet ipsum commodo turpis congue, vel consectetur lectus consectetur. Praesent consequat tortor quis nibh finibus aliquet sed ut elit.
         </div>
         <div class="menu-box">
-            <h1>Lunch Menu</h1>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar aliquam malesuada. Praesent sit amet elit tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam nulla nisi, cursus eu hendrerit vel, cursus et elit. Curabitur eros tellus, ornare aliquet tempor vel, ultricies a sapien. Donec sit amet lectus convallis, commodo odio non, fringilla odio. Nulla et magna vitae sapien tincidunt mattis vel nec metus. Aliquam laoreet ipsum commodo turpis congue, vel consectetur lectus consectetur. Praesent consequat tortor quis nibh finibus aliquet sed ut elit.
+            <img src="img/menu_blank.png">
             </div>
             <div class="calendar-box">
                 <h1>Calendar</h1>
@@ -28,5 +46,13 @@
                     <h1>Riddle Of The Week</h1>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar aliquam malesuada. Praesent sit amet elit tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam nulla nisi, cursus eu hendrerit vel, cursus et elit. Curabitur eros tellus, ornare aliquet tempor vel, ultricies a sapien. Donec sit amet lectus convallis, commodo odio non, fringilla odio. Nulla et magna vitae sapien tincidunt mattis vel nec metus. Aliquam laoreet ipsum commodo turpis congue, vel consectetur lectus consectetur. Praesent consequat tortor quis nibh finibus aliquet sed ut elit.
                     </div>
+                    <div class="art1-box">
+                        <h1>Headline</h1>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar aliquam malesuada. Praesent sit amet elit tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam nulla nisi, cursus eu hendrerit vel, cursus et elit. Curabitur eros tellus, ornare aliquet tempor vel, ultricies a sapien. Donec sit amet lectus convallis, commodo odio non, fringilla odio. Nulla et magna vitae sapien tincidunt mattis vel nec metus. Aliquam laoreet ipsum commodo turpis congue, vel consectetur lectus consectetur. Praesent consequat tortor quis nibh finibus aliquet sed ut elit.
+                        </div>
+                        <div class="art2-box">
+                            <h1>Headline</h1>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar aliquam malesuada. Praesent sit amet elit tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam nulla nisi, cursus eu hendrerit vel, cursus et elit. Curabitur eros tellus, ornare aliquet tempor vel, ultricies a sapien. Donec sit amet lectus convallis, commodo odio non, fringilla odio. Nulla et magna vitae sapien tincidunt mattis vel nec metus. Aliquam laoreet ipsum commodo turpis congue, vel consectetur lectus consectetur. Praesent consequat tortor quis nibh finibus aliquet sed ut elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar aliquam malesuada. Praesent sit amet elit tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam nulla nisi, cursus eu hendrerit vel, cursus et elit. Curabitur eros tellus, ornare aliquet tempor vel, ultricies a sapien. Donec sit amet lectus convallis, commodo odio non, fringilla odio. Nulla et magna vitae sapien tincidunt mattis vel nec metus. Aliquam laoreet ipsum commodo turpis congue, vel consectetur lectus consectetur. Praesent consequat tortor quis nibh finibus aliquet sed ut elit.
+                            </div>
     </div>
 </html>
