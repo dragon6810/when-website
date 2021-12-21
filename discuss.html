@@ -14,7 +14,9 @@
                 // to change the css sheet.
                 if (theme.getAttribute('href') == 'css/style.css') {
                     theme.setAttribute('href', 'css/dark.css');
-                } else {
+                } else if(theme.getAttribute('href') == 'css/dark.css'){
+                    theme.setAttribute('href', 'css/lava-theme.css');
+                } else if(theme.getAttribute('href') == 'css/dark.css'){
                     theme.setAttribute('href', 'css/style.css');
                 }
             }
