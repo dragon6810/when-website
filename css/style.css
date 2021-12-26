@@ -1,6 +1,6 @@
 @font-face {
     font-family: winn;
-    src: url(WINN.otf) format("opentype");
+    src: url(/WINN.otf) format("opentype");
 }
 
 body{
