@@ -99,6 +99,7 @@ a{
     text-align: center;
     align-content: center;
     overflow: hidden;
+    padding: 5px;
 }
 
 .menu-box h1{
