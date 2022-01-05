@@ -1,3 +1,8 @@
+@font-face {
+    font-family: winn;
+    src: url(/WINN.otf) format("opentype");
+}
+
 body{
     flex-flow: column wrap;
     justify-content: center;
@@ -5,7 +10,7 @@ body{
     padding-bottom: 10px;
     background-color:#2e2e2e;
     color:#c2c2c2;
-    font-family: Helvetica, sans-serif;
+    font-family: winn, Helvetica, sans-serif;
     font-size:16px;
     line-height:1.6em;
     margin:auto;
