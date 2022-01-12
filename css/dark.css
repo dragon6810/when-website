@@ -190,6 +190,25 @@ a{
     text-align: center;
 }
 
+.article-box{
+    width: 50%;
+    height: 50%;
+    background-color: #2c2c2c;
+    margin-left: 1%;
+    margin-top: 1%;
+    border: 2px rgb(0, 0, 0) solid;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: left;
+}
+
+.article-box h1{
+    font-size: 24px;
+    margin:0;
+    width: 100%;
+    text-align: center;
+}
+
 .tabs-box{
     background-color: rgb(39, 32, 53);
     border-top: 2px rgb(0, 0, 0) solid;
@@ -206,7 +225,7 @@ a{
 
 span {
     position: absolute;
-    background: #2c2c2c;
+    background: #fff;
     transform: translate(-50%, -50%);
     pointer-events: none;
     border-radius: 50%;
