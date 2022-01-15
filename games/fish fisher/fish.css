@@ -1,0 +1,90 @@
+@font-face {
+    font-family: winn;
+    src: url(/WINN.otf) format("opentype");
+}
+
+.sectionleft {
+    float: left;
+    width: 75%;
+    height: 100%;
+}
+
+.sectionright {
+    float: right;
+    width: 25%;
+    height: 100%;
+}
+
+.fishcountercontainer {
+    background-color: #44444466;
+    width: 50%;
+    border-radius: 1000px;
+    padding: 1px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.clickerContainer img {
+    position: relative;
+    transition: all .1s ease-in-out;
+}
+
+.clickerContainer img:hover {
+    transform: scale(1.10);
+}
+
+.clickerContainer img:active {
+    transform: scale(0.80);
+}
+
+.shopbutton {
+    padding: 4px;
+    background-image: url("img/button.png");
+    background-color: #cccccc;
+    background-size: contain;
+    font-size: 24px;
+    max-width: 480px;
+    max-height: 56px;
+    min-width: 480px;
+    min-height: 56px;
+}
+
+.shopbutton #nameandcost {
+    font-size: 16px;
+}
+
+.shopbutton #amount {
+    font-size: 48px;
+    color: #595959;
+    width:15%;
+}
+
+.shopbutton:hover {
+    background-image: url("img/buttonhover.png");
+}
+
+.shopbutton:active {
+    background-image: url("img/buttonpressed.png");
+}
+
+body 
+{
+    font-family: winn, Helvetica, sans-serif;
+    font-size:32px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: pixelated;
+}
+
+button
+{
+    font-family: winn, Helvetica, sans-serif;
+    font-size:32px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: pixelated;
+}

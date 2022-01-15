@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fish Fisher</title>
+        <link rel="stylesheet" type="text/css" href="fish.css">
+    </head>
+
+    <body>
+        <div class="sectionleft">
+            <center>
+            <div class="fishcountercontainer">
+            <p><span id="fish">0</span> Fish</p>
+            <p><span id="fishpersecond">0</span> Fish Per Second</p>
+        </div>
+            <div class="clickerContainer">
+            <img src="img/big_fish.png" alt="Big Fish" height="512px" width="512px" onclick="addfish(clickingpower)">
+        </div>
+            </center>
+
+        </div>
+        <div class="sectionright">
+            <table class="shopbutton" onclick="getfishrod()">
+                <tr>
+                    <td id="image"><img src="img/fishrod.png" width=64px height=64px></td>
+                    <td id="nameandcost">
+                        <p>Fishing Rod</p>
+                        <p><span id="fishrodcost">15</span> Fish</p>
+                    </td>
+                    <td id="amount"><span id="fishrods">0</span></td>
+                </tr>
+            </table>
+            <table class="shopbutton" onclick="getfishingnet()">
+                <tr>
+                    <td id="image"><img src="img/fishnet.png" width=64px height=64px></td>
+                    <td id="nameandcost">
+                        <p>Fishing Net</p>
+                        <p><span id="fishnetcost">150</span> Fish</p>
+                    </td>
+                    <td id="amount"><span id="fishnets">0</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <script>
+            var fish = 0;
+            var clickingpower = 1;
+
+            var fishrodcost = 15;
+            var fishrods = 0;
+
+            function getfishrod() {
+                if (fish >= fishrodcost) {
+                    fish = fish - fishrodcost;
+                    fishrods = fishrods + 1;
+                    fishrodcost = Math.round(fishrodcost * 1.15);
+
+                    document.getElementById("fish").innerHTML = fish;
+                    document.getElementById("fishrodcost").innerHTML = fishrodcost;
+                    document.getElementById("fishrods").innerHTML = fishrods;
+                    updatefishpersecond();
+                }
+            }
+
+        var fishnetcost = 150;
+        var fishnets = 0;
+
+        function getfishnet() {
+            if (fish >= fishnetcost) {
+              fish = fish - fishnetcost;
+              fishnets = fishnets + 1;
+              fishnetcost = Math.round(fishnetcost * 1.15);
+
+              document.getElementById("fish").innerHTML = fish;
+              document.getElementById("fishnetcost").innerHTML = fishnetcost;
+              document.getElementById("fishnets").innerHTML = fishnets;
+              updatefishpersecond();
+
+         }
+    }
+
+            function addfish(amount) {
+                fish = fish + amount;
+                document.getElementById("fish").innerHTML = fish;
+            }
+
+            function updatefishpersecond() {
+                fishpersecond = fishrods + fishnets * 5;
+                document.getElementById("fishpersecond").innerHTML = fishpersecond;
+            }
+
+            setInterval(function() {
+                fish = fish + fishrods;
+                fish = fish + fishnets * 3;
+                document.getElementById("fish").innerHTML = fish;
+
+                document.title = "Fish Fisher - " + fish + " Fish";
+            }, 1000); // 1000ms = 1s
+        </script>
+    </body>
+</html>
