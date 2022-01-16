@@ -29,7 +29,17 @@
                     <td id="amount"><span id="fishrods">0</span></td>
                 </tr>
             </table>
-            <table class="shopbutton" onclick="getfishingnet()">
+            <table class="shopbutton" onclick="getfishnet()">
+                <tr>
+                    <td id="image"><img src="img/fishnet.png" width=64px height=64px></td>
+                    <td id="nameandcost">
+                        <p>Fishing Net</p>
+                        <p><span id="fishnetcost">150</span> Fish</p>
+                    </td>
+                    <td id="amount"><span id="fishnets">0</span></td>
+                </tr>
+            </table>
+            <table class="shopbutton" onclick="getfishnet()">
                 <tr>
                     <td id="image"><img src="img/fishnet.png" width=64px height=64px></td>
                     <td id="nameandcost">
@@ -48,11 +58,17 @@
             var fishrodcost = 15;
             var fishrods = 0;
 
-            function getfishrod() {
-                if (fish >= fishrodcost) {
-                    fish = fish - fishrodcost;
-                    fishrods = fishrods + 1;
-                    fishrodcost = Math.round(fishrodcost * 1.15);
+            var fishnetcost = 150;
+            var fishnets = 0;
+
+            var trapcost = 150;
+            var traps = 0;
+
+            function gettrap() {
+                if (fish >= trapcost) {
+                    fish = fish - fishtrapcost;
+                    traps = traps + 1;
+                    traps = Math.round(traps * 1.15);
 
                     document.getElementById("fish").innerHTML = fish;
                     document.getElementById("fishrodcost").innerHTML = fishrodcost;
@@ -60,9 +76,6 @@
                     updatefishpersecond();
                 }
             }
-
-        var fishnetcost = 150;
-        var fishnets = 0;
 
         function getfishnet() {
             if (fish >= fishnetcost) {
