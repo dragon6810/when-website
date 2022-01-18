@@ -1,0 +1,10 @@
+ <table class="shopbutton unselectable" onclick="building.purchase('+i+')">
+                <tr>
+                    <td id="image"><img src="img/'+building.image[i]+'"></td>
+                    <td id="nameandcost">
+                        <p>'+building.name[i]+'</p>
+                        <p><span>'+building.cost[i]+'</span> Fish</p>
+                    </td>
+                    <td id="amount"><span>'+building.count[i]+'</span></td>
+                </tr>
+            </table>
