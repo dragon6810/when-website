@@ -2,15 +2,17 @@
     font-family: winn;
     src: url(/WINN.otf) format("opentype");
 }
+.flex {
+    display: flex;
+    justify-content: flex-start;
+}
 
 .sectionleft {
-    float: left;
     width: 75%;
     height: 100%;
 }
 
 .sectionright {
-    float: right;
     width: 25%;
     height: 100%;
 }
@@ -89,6 +91,10 @@
 }
 
 #upgradecontainer img {
+    background-color: #4c4c4c;
+    border-color: #000000;
+    border-width: 25px;
+    border-radius: 5px;
     width: 64px;
     height: 64px;
 }

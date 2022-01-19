@@ -121,9 +121,9 @@ var display = {
         for (i = 0; i < upgrade.name.length; i++) {
             if (!upgrade.purchased[i]) {
                 if (upgrade.type[i] == "building" && building.count[upgrade.buildingindex[i]] >= upgrade.requirement[i]) {
-                    document.getElementById("upgradecontainer").innerHTML += '<img src="img/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description+' &#10; ('+upgrade.cost[i]+' fish)" onlick="upgrade.purchase('+i+')">';
+                    document.getElementById("upgradecontainer").innerHTML += '<img src="img/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description+' &#10; ('+upgrade.cost[i]+' fish)" onclick="upgrade.purchase('+i+')">';
                 } else if (upgrade.type[i] == "click" && game.totalclicks >= upgrade.requirement[i]) {
-                    document.getElementById("upgradecontainer").innerHTML += '<img src="img/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description+' &#10; ('+upgrade.cost[i]+' fish)" onlick="upgrade.purchase('+i+')">';
+                    document.getElementById("upgradecontainer").innerHTML += '<img src="img/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description+' &#10; ('+upgrade.cost[i]+' fish)" onclick="upgrade.purchase('+i+')">';
                 }
             }
         }
@@ -208,7 +208,7 @@ setInterval(function() {
 }, 10000);
 
 window.onbeforeunload = function() {
-    savegame();
+    //savegame();
 }
 
 setInterval(function() {
