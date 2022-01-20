@@ -57,30 +57,62 @@ var building = {
 
     var upgrade = {
         name: [
-            "Metal Rods"
+            "Metal Rods",
+            "Double-Threading",
+            "Bait",
+            "Stone Cursor",
+            "Iron Cursor"
         ],
         description: [
-            "Boost the durability of the fishing rods, doubling production speed"
+            "Fishing rod production x2",
+            "Fishing net production x2",
+            "Trap production x2",
+            "Clicking Power x2",
+            "Clicking Power x2"
         ],
         image: [
-            "metalrod.png"
+            "metalrod.png",
+            "doublethread.png",
+            "trapbait.png",
+            "stonecursor.png",
+            "ironcursor.png"
         ],
         type: [
-            "building"
+            "building",
+            "building",
+            "building",
+            "click",
+            "click"
         ],
         cost: [
-            500
+            500,
+            1000,
+            10000,
+            250,
+            1000
         ],
         buildingindex: [
-            0
+            0,
+            1,
+            2,
+            -1,
+            -1
         ],
         requirement: [
-            10
+            10,
+            10,
+            10,
+            10,
+            250
         ],
         bonus: [
+            2,
+            2,
+            2,
+            2,
             2
         ],
-        purchased: [false],
+        purchased: [false, false, false, false, false],
         purchase: function(index) {
             if (!this.purchased[index] && game.fish >= this.cost[index]) {
                 if (this.type[index] == "building" && building.count[this.buildingindex[index]] >= this.requirement[index]) {
@@ -102,6 +134,38 @@ var building = {
         }
     };
 
+    var achievement = {
+        name: [
+            "Sweaty fingers",
+            "Fishy Buisness"
+        ],
+        description: [
+            "Click 1000 times",
+            "Catch your first fish"
+        ],
+        image: [
+            "sweatyfingers.png",
+            "firstfish.png"
+        ],
+        type: [
+            "click",
+            "fish"
+        ],
+        requirement: [
+            100,
+            1
+        ],
+        objectindex: [
+            -1,
+            -1
+        ],
+        awarded: [false, false],
+
+        earn: function(index) {
+            this.awarded[index] = true;
+        }
+    }
+
 var display = {
     updatefish: function() {
         document.getElementById("fish").innerHTML = game.fish;
@@ -121,10 +185,19 @@ var display = {
         for (i = 0; i < upgrade.name.length; i++) {
             if (!upgrade.purchased[i]) {
                 if (upgrade.type[i] == "building" && building.count[upgrade.buildingindex[i]] >= upgrade.requirement[i]) {
-                    document.getElementById("upgradecontainer").innerHTML += '<img src="img/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description+' &#10; ('+upgrade.cost[i]+' fish)" onclick="upgrade.purchase('+i+')">';
+                    document.getElementById("upgradecontainer").innerHTML += '<img src="img/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' fish)" onclick="upgrade.purchase('+i+')">';
                 } else if (upgrade.type[i] == "click" && game.totalclicks >= upgrade.requirement[i]) {
-                    document.getElementById("upgradecontainer").innerHTML += '<img src="img/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description+' &#10; ('+upgrade.cost[i]+' fish)" onclick="upgrade.purchase('+i+')">';
+                    document.getElementById("upgradecontainer").innerHTML += '<img src="img/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' fish)" onclick="upgrade.purchase('+i+')">';
                 }
+            }
+        }
+    },
+
+    updateachievements: function() {
+        document.getElementById("achievementcontainer").innerHTML = "";
+        for (i = 0; i < achievement.name.length; i++) {
+            if (achievement.awarded[i]) {
+                document.getElementById("achievementcontainer").innerHTML += '<img src="img/'+achievement.image[i]+'" title="'+achievement.name[i]+' &#10; '+achievement.description[i]+'">'
             }
         }
     }
@@ -140,7 +213,8 @@ function savegame() {
         buildingcount: building.count,
         buildingincome: building.income,
         buildingcost: building.cost,
-        upgradepurchased: upgrade.purchased
+        upgradepurchased: upgrade.purchased,
+        achievementawarded: achievement.awared
     };
     localStorage.setItem("gamesave", JSON.stringify(gamesave));
 }
@@ -173,6 +247,11 @@ function loadgame() {
                 upgrade.purchased[i] = savedgame.upgradepurchased[i];
             }
         }
+        if (typeof savedgame.achievementawarded !== "undefined") {
+            for (i = 0; i < savedgame.achievementawarded.length; i++) {
+                achievement.awarded[i] = savedgame.achievementawarded[i];
+            }
+        }
     }
 }
 
@@ -193,13 +272,20 @@ window.onload = function() {
     loadgame();
     display.updatefish();
     display.updateupgrades();
+    display.updateachievements();
     display.updateshop();
 }
 
 setInterval(function() {
+    for (i = 0; i < achievement.name.length; i++) {
+        if (achievement.type[i] == "fish" && game.totalfish >= achievement.requirement[i]) achievement.earn(i);
+        else if (achievement.type[i] == "click" && game.totalclicks >= achievement.requirement[i]) achievement.earn(i);
+        else if (achievement.type[i] == "building" && building.count[achievement.objectindex[i]] >= achievement.requirement[i]) achievement.earn(i);
+    }
     game.fish += game.getfishpersecond();
     game.totalfish += game.getfishpersecond();
     display.updatefish();
+    display.updateachievements();
 }, 1000);
 
 setInterval(function() {

@@ -27,6 +27,7 @@
 }
 
 .clickercontainer img {
+    cursor: url(img/finger.png), auto;
     position: relative;
     transition: all .1s ease-in-out;
 }
@@ -40,6 +41,7 @@
 }
 
 .shopbutton {
+    cursor: url(img/finger.png), auto;
     padding: 4px;
     background-image: url("img/button.png");
     background-color: #cccccc;
@@ -87,12 +89,31 @@
 }
 
 .shopbutton:active {
+    cursor: url(img/cursor.png), auto;
     background-image: url("img/buttonpressed.png");
 }
 
 #upgradecontainer img {
+    cursor: url(img/finger.png), auto;
     background-color: #4c4c4c;
+    border-width: 25px;
+    border-radius: 5px;
     border-color: #000000;
+    width: 64px;
+    height: 64px;
+}
+
+#achievementcontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#achievementcontainer img {
+    cursor: url(img/finger.png), auto;
+    border-color: #000000;
+    background-color: #4c4c4c;
     border-width: 25px;
     border-radius: 5px;
     width: 64px;
@@ -101,6 +122,7 @@
 
 body 
 {
+    cursor: url(img/cursor.png), auto;
     font-family: winn, Helvetica, sans-serif;
     font-size:32px;
     image-rendering: -moz-crisp-edges;
