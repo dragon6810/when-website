@@ -152,7 +152,7 @@ var building = {
             "fish"
         ],
         requirement: [
-            100,
+            1000,
             1
         ],
         objectindex: [
