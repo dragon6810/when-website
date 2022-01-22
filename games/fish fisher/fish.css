@@ -8,6 +8,7 @@
 }
 
 .sectionleft {
+    background-image: url("img/background.png");
     width: 75%;
     height: 100%;
 }
@@ -18,7 +19,8 @@
 }
 
 .fishcountercontainer {
-    background-color: #44444466;
+    background-color: #444444aa;
+    color: #cccccc;
     width: 50%;
     border-radius: 1000px;
     padding: 1px;
@@ -30,6 +32,7 @@
     cursor: url(img/finger.png), auto;
     position: relative;
     transition: all .1s ease-in-out;
+    filter: drop-shadow(0px 0px 20px #000000);
 }
 
 .clickercontainer img:hover {
@@ -56,6 +59,7 @@
 .shopbutton img {
     height: 90px;
     width: 90px;
+    filter: drop-shadow(6px 6px 7px rgba(0,0,0,0.8));
 }
 
 .shopbutton #nameandcost p{
@@ -94,6 +98,7 @@
 }
 
 #upgradecontainer img {
+    filter: drop-shadow(6px 6px 7px rgba(0,0,0,0.8));
     cursor: url(img/finger.png), auto;
     background-color: #4c4c4c;
     border-width: 25px;
