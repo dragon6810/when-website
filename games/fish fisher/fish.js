@@ -26,6 +26,11 @@ var building = {
         "Fishing Net",
         "Trap"
     ],
+    id: [
+        "fishrod",
+        "fishnet",
+        "trap"
+    ],
     image: [
         "fishrod.png",
         "fishnet.png",
@@ -51,6 +56,7 @@ var building = {
             display.updatefish();
             display.updateshop();
             display.updateupgrades();
+            display.updatebuildingmap();
         }
     }
     }
@@ -129,6 +135,7 @@ var building = {
 
                     display.updateupgrades();
                     display.updatefish();
+                    display.updatebuildingmap();
                 }
             }
         }
@@ -198,6 +205,26 @@ var display = {
         for (i = 0; i < achievement.name.length; i++) {
             if (achievement.awarded[i]) {
                 document.getElementById("achievementcontainer").innerHTML += '<img src="img/'+achievement.image[i]+'" title="'+achievement.name[i]+' &#10; '+achievement.description[i]+'">'
+            }
+        }
+    },
+
+    updatebuildingmap: function() {
+        document.getElementById("displaybuilding").innerHTML = '';
+        for (i = 0; i < building.name.length; i++) {
+            if (building.count[i] > 0) {
+                let widthleft = document.getElementById('sectionleft').clientWidth;
+                let widthright = document.getElementById('sectionright').clientWidth;
+                document.getElementById("displaybuilding").innerHTML += `<canvas class="buildingrow" id="`+building.id[i]+`row" width="`+window.innerWidth - (widthleft + widthright)+`" height="128"></canvas>`;
+                let canvas = document.getElementById(building.id[i]+"row");
+                let ctx = canvas.getContext("2d");
+                let backgroundimg = new Image();
+                let canvasW = canvas.getBoundingClientRect().width;
+                let canvasH = canvas.getBoundingClientRect().height;
+                backgroundimg.src = 'img/'+building.id[i]+'background.png';
+                backgroundimg.onload = function() {
+                    ctx.drawImage(backgroundimg, 0, 0, canvasH, canvasH);
+                  }
             }
         }
     }
@@ -274,6 +301,7 @@ window.onload = function() {
     display.updateupgrades();
     display.updateachievements();
     display.updateshop();
+    display.updatebuildingmap();
 }
 
 setInterval(function() {
@@ -295,6 +323,10 @@ setInterval(function() {
 
 window.onbeforeunload = function() {
     //savegame();
+}
+
+window.onresize = function() {
+    display.updatebuildingmap();
 }
 
 setInterval(function() {

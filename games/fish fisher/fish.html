@@ -4,9 +4,9 @@
         <title>Fish Fisher</title>
         <link rel="stylesheet" type="text/css" href="fish.css">
     </head>
-    <div class="flex">
+    <div class="flex"></div>
     <body>
-        <div class="sectionleft">
+        <div class="sectionleft" id="sectionleft">
             <center>
             <div class="fishcountercontainer unselectable">
             <p><span id="fish">0</span> Fish</p>
@@ -19,10 +19,14 @@
 
             <div class="sectionfooter">
                 <button class="wipesave" onclick="resetgame()">WIPE GAME</button>
-                <h5>Fish Fisher</h5>
             </div>
         </div>
-        <div class="sectionright">
+        <div class="sectionmiddle">
+            <div id="menu"></div>
+            <div id="displaybuilding">
+            </div>
+        </div>
+        <div class="sectionright" id="sectionright">
             <div id="upgradecontainer"></div>
             <div id="shopcontainer"></div>
             <div id="achievementcontainer"></div>
