@@ -67,12 +67,14 @@ var building = {
             "Double-Threading",
             "Bait",
             "Stone Cursor",
-            "Iron Cursor"
+            "Iron Cursor",
+            "Butterfly Clicking"
         ],
         description: [
             "Fishing rod production x2",
             "Fishing net production x2",
             "Trap production x2",
+            "Clicking Power x2",
             "Clicking Power x2",
             "Clicking Power x2"
         ],
@@ -81,12 +83,14 @@ var building = {
             "doublethread.png",
             "trapbait.png",
             "stonecursor.png",
-            "ironcursor.png"
+            "ironcursor.png",
+            "butterfly.png"
         ],
         type: [
             "building",
             "building",
             "building",
+            "click",
             "click",
             "click"
         ],
@@ -95,12 +99,14 @@ var building = {
             1000,
             10000,
             250,
-            1000
+            1000,
+            10000
         ],
         buildingindex: [
             0,
             1,
             2,
+            -1,
             -1,
             -1
         ],
@@ -109,16 +115,18 @@ var building = {
             10,
             10,
             10,
-            250
+            250,
+            500
         ],
         bonus: [
             2,
             2,
             2,
             2,
+            2,
             2
         ],
-        purchased: [false, false, false, false, false],
+        purchased: [false, false, false, false, false, false],
         purchase: function(index) {
             if (!this.purchased[index] && game.fish >= this.cost[index]) {
                 if (this.type[index] == "building" && building.count[this.buildingindex[index]] >= this.requirement[index]) {

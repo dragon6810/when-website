@@ -4,7 +4,7 @@
 }
 
 body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer, .clickercontainer,
-.shopbutton, .buildingrow, #upgradecontainer, #achievementcontainer {
+.shopbutton, .buildingrow, .woodbutton, #upgradecontainer, #achievementcontainer {
     margin: 0px;
     padding: 0px;
     image-rendering: -moz-crisp-edges;
@@ -26,10 +26,9 @@ body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer
 }
 
 .sectionmiddle {
+    background-image: url("img/darknoise.png");
     position:absolute;
 	left:30%;
-	padding-left:16px;
-	margin-right:15px;
 	top:0px;
 	right:318px;
 	bottom:0px;
@@ -84,6 +83,7 @@ body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer
     max-height: 56px;
     min-width: 480px;
     min-height: 56px;
+    overflow: hidden;
 }
 
 .shopbutton img {
@@ -153,6 +153,20 @@ body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer
     border-radius: 5px;
     width: 64px;
     height: 64px;
+}
+
+.woodbutton {
+    width: 256px;
+    height: 64px;
+    overflow: hidden;
+    background-image: url(img/woodbutton.png);
+    border: none;
+    cursor: url(img/finger.png), auto;
+    color: #c6c6c6;
+}
+
+.woodbutton:active {
+    background-image: url(img/woodbutton-active.png);
 }
 
 body 
