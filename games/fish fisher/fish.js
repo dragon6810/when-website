@@ -233,6 +233,16 @@ var display = {
 
         rowcanvas.width = innerWidth - (sectionleft.clientWidth + sectionright.clientWidth);
         rowcanvas.height = innerHeight - (menu.clientHeight);
+
+        function draw(mybuilding, backgroundsize) {
+            let backgroundimg = 'img/'+building.id[mybuilding]+'background.png';
+
+            rc.drawImage(backgroundimg, 0, 0, backgroundsize, backgroundsize);
+        }
+
+        for (i = 0; i < building.count.length; i++) {
+            draw(i, 128);
+        }
     }
 };
 
