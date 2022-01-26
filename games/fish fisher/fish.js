@@ -237,7 +237,7 @@ var display = {
         function draw(mybuilding, backgroundsize) {
             let backgroundimg = 'img/'+building.id[mybuilding]+'background.png';
 
-            rc.drawImage(backgroundimg, 0, 0, backgroundsize, backgroundsize);
+            void rc.drawImage(backgroundimg, 0, 0, backgroundsize, backgroundsize);
         }
 
         for (i = 0; i < building.count.length; i++) {
