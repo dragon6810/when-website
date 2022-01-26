@@ -20,6 +20,12 @@ var game = {
     }
 };
 
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
 var building = {
     name: [
         "Fishing Rod",
@@ -56,7 +62,7 @@ var building = {
             display.updatefish();
             display.updateshop();
             display.updateupgrades();
-            display.updatebuildingmap();
+            display.updatebuildingrows();
         }
     }
     }
@@ -143,7 +149,7 @@ var building = {
 
                     display.updateupgrades();
                     display.updatefish();
-                    display.updatebuildingmap();
+                    display.updatebuildingrows();
                 }
             }
         }
@@ -215,8 +221,41 @@ var display = {
                 document.getElementById("achievementcontainer").innerHTML += '<img src="img/'+achievement.image[i]+'" title="'+achievement.name[i]+' &#10; '+achievement.description[i]+'">'
             }
         }
+    },
+
+    updatebuildingrows: function() {
+        var menu = document.getElementById("menu");
+        var sectionleft = document.getElementById("sectionleft");
+        var sectionright = document.getElementById("sectionright");
+        
+        const rowcanvas = document.getElementById("rowcanvases");
+        const rc = rowcanvas.getContext('2d');
+
+        rowcanvas.width = innerWidth - (sectionleft.clientWidth + sectionright.clientWidth);
+        rowcanvas.height = innerHeight - (menu.clientHeight);
     }
 };
+
+class Particle {
+    constructor(x, y, size, image, weight, directionx, directiony, ctx) {
+        this.x = x;
+        this.y = y;
+        this.size = size,
+        this.image = image;
+        this.wight = weight;
+        this.directionx = directionx;
+        this.directiony = directiony;
+        this.ctx = ctx;
+    }
+
+    update() {
+        this.weight += 0.01;
+        this.y += this.weight;
+    }
+    draw() {
+        this.ctx.drawImage('img/'+this.image, this.x, this.y, this.size);
+    }
+}
 
 function savegame() {
     var gamesave = {
@@ -283,13 +322,18 @@ document.getElementById("clicker").addEventListener("click", function() {
     game.addfish(game.clickvalue);
 }, false);
 
+addEventListener("resize", () => {
+    display.updatebuildingrows();
+})
+
 window.onload = function() {
     loadgame();
     display.updatefish();
     display.updateupgrades();
     display.updateachievements();
     display.updateshop();
-    display.updatebuildingmap();
+    display.updateachievements();
+    display.updatebuildingrows();
 }
 
 setInterval(function() {
