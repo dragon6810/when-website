@@ -4,35 +4,36 @@
         <title>Fish Fisher</title>
         <link rel="stylesheet" type="text/css" href="fish.css">
     </head>
-    <div class="flex"></div>
-    <body>
+    <body onmousemove="mousecoords(event)"> 
+        <div id="particles"></div>
         <div class="sectionleft" id="sectionleft">
             <center>
             <div class="fishcountercontainer unselectable">
             <p><span id="fish">0</span> Fish</p>
-            <p><span id="fishpersecond">0</span> Fish Per Second</p>
-        </div>
+            <div class="fishpersecond"><p><span id="fishpersecond">0</span> Fish Per Second</p></div>
+            </div>
             <div class="clickercontainer unselectable">
-            <img src="img/big_fish.png" alt="Big Fish" height="512px" width="512px" id="clicker">
+            <img src="img/big_fish.png" alt="Big Fish" height="256px" width="256px" id="clicker">
+            <div id="clickmoney"></div>
         </div>
             </center>
-
             <div class="sectionfooter">
                 <button class="wipesave" onclick="resetgame()">WIPE GAME</button>
             </div>
         </div>
+        <div class="seperatorleft"></div>
         <div class="sectionmiddle">
             <div id="menu">
                 <button class="woodbutton options">Options</button>
             </div>
             <canvas id="rowcanvases"></canvas>
         </div>
+        <div class="seperatorright"></div>
         <div class="sectionright" id="sectionright">
             <div id="upgradecontainer"></div>
             <div id="shopcontainer"></div>
             <div id="achievementcontainer"></div>
         </div>
-
         <script src="fish.js"></script>
 
     </div>
