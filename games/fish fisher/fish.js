@@ -32,6 +32,8 @@ var game = {
     }
 };
 
+// shortcuts
+function choose(arr) {return arr[Math.floor(Math.random()*arr.length)];}
 function l(what) {return document.getElementById(what);}
 
 function getRandomInt(min, max) {
@@ -42,7 +44,7 @@ function getRandomInt(min, max) {
 
 var building = {
     name: [
-        "Fishing Rod",
+        "Fishing rod",
         "Fishing Net",
         "Trap"
     ],
@@ -305,28 +307,6 @@ var display = {
                 document.getElementById("achievementcontainer").innerHTML += '<img src="img/'+achievement.image[i]+'" title="'+achievement.name[i]+' &#10; '+achievement.description[i]+'"> &#10;'
             }
         }
-    },
-
-    updatebuildingrows: function() {
-        var menu = document.getElementById("menu");
-        var sectionleft = document.getElementById("sectionleft");
-        var sectionright = document.getElementById("sectionright");
-        
-        const rowcanvas = document.getElementById("rowcanvases");
-        const rc = rowcanvas.getContext('2d');
-
-        rowcanvas.width = innerWidth - (sectionleft.clientWidth + sectionright.clientWidth);
-        rowcanvas.height = innerHeight - (menu.clientHeight);
-
-        function draw(mybuilding, backgroundsize) {
-            let backgroundimg = 'img/'+building.id[mybuilding]+'background.png';
-
-            void rc.drawImage(backgroundimg, 0, 0, backgroundsize, backgroundsize);
-        }
-
-        for (i = 0; i < building.count.length; i++) {
-            draw(i, 128);
-        }
     }
 };
 
@@ -334,17 +314,46 @@ var display = {
     var particleslot = l('particles');
     var str;
     var particles = [];
-    var particlen = 32;
+    var particlen = 50;
     var particle = {};
 
     for (var i = 0; i < particlen; i++) {
-		particles[i]={x:0,y:0,xd:0,yd:0,w:64,h:64,z:0,size:1,dur:2,life:-1,img:'firstfish.png'};
+		particles[i] = {x:0,y:0,xd:0,yd:0,w:64,h:64,z:0,size:1,dur:2,life:-1,img:'firstfish.png'};
 	}
 
-    makeparticle = function(x, y, sx, sy, speedx, speedy, dur, img, text) {
+    updateparticles = function() {
+			for (var i=0;i<Game.particlesN;i++)
+			{
+				var me=Game.particles[i];
+				if (me.life!=-1)
+				{
+					if (!me.text) me.yd+=0.2+Math.random()*0.1;
+					me.x+=me.xd;
+					me.y+=me.yd;
+					me.life++;
+					if (me.life>=Game.fps*me.dur)
+					{
+						me.life=-1;
+					}
+				}
+			}
+		}
 
-
-        particles.push(particle);
+    makeparticle = function(x, y, scale, speedx, speedy, dur, img, text) {
+        for (var i = 0; i < particlen; i++) {
+			var me = particles[i];
+			if (me.life != -1)
+			{
+				if (!me.text) me.yd += 0.2 +Math.random() * 0.1;
+				me.x += me.xd;
+				me.y += me.yd;
+				me.life++;
+				if (me.life >= game.fps * me.dur)
+				{
+					me.life=-1;
+				}
+			}
+		}
 
         setInterval(function() {
             x += (innerWidth / speedx) * 10;
@@ -355,9 +364,9 @@ var display = {
 
         for (i = 0; i < particlen; i++) {
             if (particles[i.img] !== 0) {
-            str = '<div class="particle" style="top:'+y+'px;left:'+x+'px;width:'+sx+'px;height:'+sy+'px"><img src="img/'+img+'></div>'
+            str = '<div class="particle" style="bottom:'+y+'px;right:'+x+'px;width:'+sx+'px;height:'+sy+'px; color:white;"><img src="img/'+img+'></div>'
         } else if (particles[i.text] !== 0) {
-            str = '<div class="particle" style="top:'+y+'px;left:'+x+'px;width:'+sx+'px;height:'+sy+'px">'+text+'</div>'
+            str = '<div class="particle" style="bottom:'+y+'px;right:'+x+'px;width:'+sx+'px;height:'+sy+'px; color:white">'+text+'</div>'
         }
 
         particleslot.innerHTML += str;
@@ -437,14 +446,8 @@ function resetgame() {
 document.getElementById("clicker").addEventListener("click", function() {
     game.totalclicks++;
     game.addfish(game.clickvalue);
-    display.makeparticle(MouseX, MouseY, 1, 1, 0, -10, 1000, 0, '+'+game.clickvalue);
+    makeparticle(MouseX, MouseY, 1, 1, 0, -10, 1000, 0, '+'+game.clickvalue);
 }, false);
-
-addEventListener("resize", () => {
-    display.updatebuildingrows();
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
-})
 
 window.onload = function() {
     loadgame();
@@ -453,7 +456,6 @@ window.onload = function() {
     display.updateachievements();
     display.updateshop();
     display.updateachievements();
-    display.updatebuildingrows();
     console.log('[=== ' + choose([
 				'You Little Sneak...',
 				`How's your day?`,
