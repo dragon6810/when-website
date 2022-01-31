@@ -1,3 +1,15 @@
+var MouseX;
+var MouseY;
+var loop = true;
+
+function mousecoords(event) {
+    let mousex = event.clientX;
+    let mousey = event.clientY;
+
+    MouseX = mousex;
+    MouseY = mousey;
+}
+
 var game = {
     fish: 0,
     totalfish: 0,
@@ -20,6 +32,10 @@ var game = {
     }
 };
 
+// shortcuts
+function choose(arr) {return arr[Math.floor(Math.random()*arr.length)];}
+function l(what) {return document.getElementById(what);}
+
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -28,7 +44,7 @@ function getRandomInt(min, max) {
 
 var building = {
     name: [
-        "Fishing Rod",
+        "Fishing rod",
         "Fishing Net",
         "Trap"
     ],
@@ -66,6 +82,29 @@ var building = {
         }
     }
     }
+
+        game.time=Date.now();
+		game.accumulatedDelay=0;
+		game.delayTimeouts=0;
+		game.catchupLogic=0;
+		game.fpsStartTime=0;
+		game.frameNumber=0;
+		game.currentFps=game.fps;
+		game.previousFps=game.currentFps;
+		game.getFps=function()
+		{
+			game.frameNumber++;
+			var currentTime=(Date.now()-game.fpsStartTime )/1000;
+			var result=Math.floor((game.frameNumber/currentTime));
+			if (currentTime>1)
+			{
+				game.fpsStartTime=Date.now();
+				game.frameNumber=0;
+			}
+			return result;
+		}
+
+        game.fps = game.getFps();
 
     var upgrade = {
         name: [
@@ -187,22 +226,69 @@ var building = {
         }
     }
 
+    function abbreviatenum(n) {
+        let name = [
+            'thousand',
+            'million',
+            'billion',
+            'trillion',
+            'quadrillion',
+            'quintillion',
+            'sextillion',
+            'septillion',
+            'octillion',
+            'nonillion',
+            'decillion',
+            'undecillion',
+            'doudecillion',
+            'tredecillion',
+            'quattuordecillion',
+            'quindecillion',
+            'sexdecillion',
+            'septemdecillion',
+            'octodecillion',
+            'novemdecillion',
+            'vigintillion',
+            'unvigintillion',
+            'duovigintillion',
+            'trevigintillion',
+            'quattuorvigintillion',
+            'quinvigintillion',
+            'sexvigintillion',
+            'septvigintillion',
+            'octovigintillion',
+            'nonvigintillion',
+            'trigintillion',
+            'untrigintillion',
+            'duotrigintillion',
+            'googol',
+            'infinity'
+        ];
+            for (i = 0; i < name.length; i++) {
+                if (n >= Math.pow(1000, i + 1) && n <= Math.pow(1000, i + 2)) {
+                    return Number((n / Math.pow(1000, i + 1)).toFixed(3)).toLocaleString(undefined, {minimumFractionDigits: 3}) + ' ' + name[i];
+                } else if (n < 1000) {
+                    return n;
+                }
+            }
+    }
+
 var display = {
     updatefish: function() {
-        document.getElementById("fish").innerHTML = game.fish;
+        document.getElementById("fish").innerHTML = abbreviatenum((Math.floor(game.fish))) + "<p></p>";
         document.getElementById("fishpersecond").innerHTML = game.getfishpersecond();
-        document.title = "Fish Fisher - " + game.fish + " Fish";
+        document.title = "Fish Fisher - " + abbreviatenum((Math.floor(game.fish))) + " Fish";
     },
 
     updateshop: function() {
-        document.getElementById("shopcontainer").innerHTML = "";
+        document.getElementById("shopcontainer").innerHTML = '<center><shoph1>Shop</shoph1></center> <p></p> <div class="separatorbottom"></div>';
         for (i = 0; i < building.name.length; i++) {
-            document.getElementById("shopcontainer").innerHTML += '<table class="shopbutton unselectable" onclick="building.purchase('+i+')"><tr><td id="image"><img src="img/'+building.image[i]+'"></td><td id="nameandcost"><p>'+building.name[i]+'</p><p><span>'+building.cost[i]+'</span> Fish</p></td><td id="amount"><span>'+building.count[i]+'</span></td></tr></table>';
+            document.getElementById("shopcontainer").innerHTML += '<div class="shopbutton unselectable" onclick="building.purchase('+i+')"><div id="shopimage"><img src="img/'+building.image[i]+'"> &#10;</div><div id="content"><div id="name">'+building.name[i]+'</div><div id="cost"><span>'+building.cost[i]+'</span> Fish</div><div id="amount"><span>'+building.count[i]+'</span></div></div></div>';
         }
     },
 
     updateupgrades: function() {
-        document.getElementById("upgradecontainer").innerHTML = "";
+        document.getElementById("upgradecontainer").innerHTML = "<center><shoph1>Upgrades</shoph1></center> <p></p>";
         for (i = 0; i < upgrade.name.length; i++) {
             if (!upgrade.purchased[i]) {
                 if (upgrade.type[i] == "building" && building.count[upgrade.buildingindex[i]] >= upgrade.requirement[i]) {
@@ -215,26 +301,87 @@ var display = {
     },
 
     updateachievements: function() {
-        document.getElementById("achievementcontainer").innerHTML = "";
+        document.getElementById("achievementcontainer").innerHTML = "<center><shoph1>Achievements</shoph1></center> <p></p>";
         for (i = 0; i < achievement.name.length; i++) {
             if (achievement.awarded[i]) {
-                document.getElementById("achievementcontainer").innerHTML += '<img src="img/'+achievement.image[i]+'" title="'+achievement.name[i]+' &#10; '+achievement.description[i]+'">'
+                document.getElementById("achievementcontainer").innerHTML += '<img src="img/'+achievement.image[i]+'" title="'+achievement.name[i]+' &#10; '+achievement.description[i]+'"> &#10;'
             }
         }
-    },
-
-    updatebuildingrows: function() {
-        var menu = document.getElementById("menu");
-        var sectionleft = document.getElementById("sectionleft");
-        var sectionright = document.getElementById("sectionright");
-        
-        const rowcanvas = document.getElementById("rowcanvases");
-        const rc = rowcanvas.getContext('2d');
-
-        rowcanvas.width = innerWidth - (sectionleft.clientWidth + sectionright.clientWidth);
-        rowcanvas.height = innerHeight - (menu.clientHeight);
     }
 };
+
+
+    var particleslot = l('particles');
+    var str;
+    var particles = [];
+    var particlen = 50;
+    var particle = {};
+
+    for (var i = 0; i < particlen; i++) {
+		particles[i] = {x:0,y:0,xd:0,yd:0,w:64,h:64,z:0,size:1,dur:2,life:-1,img:'firstfish.png'};
+	}
+
+    updateparticles = function() {
+			for (var i=0;i<Game.particlesN;i++)
+			{
+				var me=Game.particles[i];
+				if (me.life!=-1)
+				{
+					if (!me.text) me.yd+=0.2+Math.random()*0.1;
+					me.x+=me.xd;
+					me.y+=me.yd;
+					me.life++;
+					if (me.life>=Game.fps*me.dur)
+					{
+						me.life=-1;
+					}
+				}
+			}
+		}
+
+    makeparticle = function(x, y, scale, speedx, speedy, dur, img, text) {
+        for (var i = 0; i < particlen; i++) {
+			var me = particles[i];
+			if (me.life != -1)
+			{
+				if (!me.text) me.yd += 0.2 +Math.random() * 0.1;
+				me.x += me.xd;
+				me.y += me.yd;
+				me.life++;
+				if (me.life >= game.fps * me.dur)
+				{
+					me.life=-1;
+				}
+			}
+		}
+
+        setInterval(function() {
+            x += (innerWidth / speedx) * 10;
+            y += (innerHeight / speedy) * 10;
+        }, 10);
+        
+        particleslot.innerHTML = '';
+
+        for (i = 0; i < particlen; i++) {
+            if (particles[i.img] !== 0) {
+            str = '<div class="particle" style="bottom:'+y+'px;right:'+x+'px;width:'+sx+'px;height:'+sy+'px; color:white;"><img src="img/'+img+'></div>'
+        } else if (particles[i.text] !== 0) {
+            str = '<div class="particle" style="bottom:'+y+'px;right:'+x+'px;width:'+sx+'px;height:'+sy+'px; color:white">'+text+'</div>'
+        }
+
+        particleslot.innerHTML += str;
+        }
+
+        str = '';
+
+        for (i = 0; i < particlen; i++) {
+                particleslot.innerHTML += particles[i];
+        }
+
+        setInterval(function() {
+
+        }, dur);
+    }
 
 function savegame() {
     var gamesave = {
@@ -299,11 +446,8 @@ function resetgame() {
 document.getElementById("clicker").addEventListener("click", function() {
     game.totalclicks++;
     game.addfish(game.clickvalue);
+    makeparticle(MouseX, MouseY, 1, 1, 0, -10, 1000, 0, '+'+game.clickvalue);
 }, false);
-
-addEventListener("resize", () => {
-    display.updatebuildingrows();
-})
 
 window.onload = function() {
     loadgame();
@@ -312,7 +456,14 @@ window.onload = function() {
     display.updateachievements();
     display.updateshop();
     display.updateachievements();
-    display.updatebuildingrows();
+    console.log('[=== ' + choose([
+				'You Little Sneak...',
+				`How's your day?`,
+				'plz no hack |8}',
+				'cheated fish will make you sick!',
+				'It would be cool if you hit f12',
+                `Your're just debugging... right?`
+			]) + ' ===]');
 }
 
 setInterval(function() {
@@ -321,11 +472,11 @@ setInterval(function() {
         else if (achievement.type[i] == "click" && game.totalclicks >= achievement.requirement[i]) achievement.earn(i);
         else if (achievement.type[i] == "building" && building.count[achievement.objectindex[i]] >= achievement.requirement[i]) achievement.earn(i);
     }
-    game.fish += game.getfishpersecond();
-    game.totalfish += game.getfishpersecond();
+    game.fish += game.getfishpersecond() / 100;
+    game.totalfish += game.getfishpersecond() / 100;
     display.updatefish();
     display.updateachievements();
-}, 1000);
+}, 10);
 
 setInterval(function() {
     display.updatefish();

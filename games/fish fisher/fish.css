@@ -1,10 +1,4 @@
-@font-face {
-    font-family: winn;
-    src: url(/WINN.otf) format("opentype");
-}
-
-body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer, .clickercontainer,
-.shopbutton, .buildingrow, .woodbutton, #upgradecontainer, #achievementcontainer {
+body, button, div, shoph1, canvas {
     margin: 0px;
     padding: 0px;
     image-rendering: -moz-crisp-edges;
@@ -14,8 +8,29 @@ body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer
     image-rendering: pixelated;
 }
 
+#particles {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 100000000000;
+}
+
+.particle {
+    position: absolute;
+    pointer-events: none;
+    left: -200px;
+    bottom: 0px;
+    width: 400px;
+    z-index: 100000000;
+    text-align: center;
+    text-shadow: 1px 1px 1px #000, 0px 0px 6px #000;
+    color: white;
+    font-size: 24px;
+}
+
 .sectionleft {
-    background-image: url("img/background.png");
+    background: url("img/background.png"), repeat;
+    background: url(img/gradienttop.png) repeat-x top left, url(img/gradientbottom.png) repeat-x bottom left, url(img/gradientright.png) repeat-y right top, url(img/gradientleft.png) repeat-y left top, url("img/background.png"), repeat;
     position:absolute;
 	left:0px;
 	top:0px;
@@ -33,8 +48,9 @@ body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer
 	right:318px;
 	bottom:0px;
 	min-width:100px;
+    padding-left: 16px;
 	overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 .sectionright {
@@ -48,13 +64,25 @@ body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer
 }
 
 .fishcountercontainer {
-    background-color: #444444aa;
+    background-color: #111111aa;
     color: #cccccc;
-    width: 50%;
+    width: 75%;
     border-radius: 1000px;
     padding: 1px;
     font-size: 24px;
     font-weight: bold;
+}
+
+.fishcountercontainer .fishpersecond {
+    font-size: 16px;
+}
+
+@keyframes wobblein {
+    0% {transform: scale(100%)}
+    25% {transform: scale(130%)}
+    75% {transform: scale(105%)}
+    95% {transform: scale(120%)}
+    100% {transform: scale(115%)}
 }
 
 .clickercontainer img {
@@ -65,50 +93,83 @@ body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer
 }
 
 .clickercontainer img:hover {
-    transform: scale(1.10);
+    transform: scale(1.15);
 }
 
 .clickercontainer img:active {
     transform: scale(0.80);
 }
 
+shoph1 {
+    font-size: 32px;
+    color: #ffffff;
+    filter: drop-shadow(0px 0px 5px #ffffffc2)
+}
+
 .shopbutton {
+    width: 300px;
+    height: 64px;
     cursor: url(img/finger.png), auto;
-    padding: 4px;
-    background-image: url("img/button.png");
-    background-color: #cccccc;
-    background-size: contain;
+    background: url("img/button.png");
+    position: relative;
     font-size: 24px;
-    max-width: 480px;
-    max-height: 56px;
-    min-width: 480px;
-    min-height: 56px;
-    overflow: hidden;
 }
 
-.shopbutton img {
-    height: 90px;
-    width: 90px;
-    filter: drop-shadow(6px 6px 7px rgba(0,0,0,0.8));
+.shopbutton #shopimage {
+    width:64px;
+	height:64px;
+	position:absolute;
+	left:0px;
+	top:0px;
+    margin: 0px;
 }
 
-.shopbutton #nameandcost p{
-    font-size: 16px;
-    width: 60%;
+.shopbutton #shopimage img {
+    width: 64px;
+	height: 64px;
+	position:absolute;
+	left:0px;
+	top:0px;
+    margin: 0px;
 }
 
-.shopbutton #nameandcost p:first-of-type{
+.shopbutton #content {
+    display: inline-block;
+	position: absolute;
+	left: 64px;
+	top: 6px;
+	right: 0px;
+	bottom: 6px;
+	padding:4px;
+    color: #ffffff;
+	text-shadow:0px 0px 6px #000,0px 1px 1px #000;
+}
+
+.shopbutton #name{
+    top: 3px;
     font-size: 24px;
 }
 
 .shopbutton #amount {
-    font-size: 48px;
-    color: #595959;
-    width:15%;
+    position:absolute;
+	right:8px;
+	bottom:5px;
+	font-size:40px;
+	opacity:0.2;
+	color:#000;
+	text-shadow:0px 0px 8px #fff;
+	letter-spacing:-2.5px;
+}
+
+.shopbutton #cost {
+    left: 3px;
+    top: 3px;
+    font-size: 16px;
 }
 
 .sectionfooter {
-    margin-top: 20%;
+    left: 0px;
+    bottom: 0px;
 }
 
 .unselectable {
@@ -119,12 +180,12 @@ body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer
 }
 
 .shopbutton:hover {
-    background-image: url("img/buttonhover.png");
+    background: url("img/buttonhover.png"), no-repeat;
 }
 
 .shopbutton:active {
     cursor: url(img/cursor.png), auto;
-    background-image: url("img/buttonpressed.png");
+    background: url("img/buttonpressed.png"), no-repeat;
 }
 
 #upgradecontainer img {
@@ -134,15 +195,8 @@ body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer
     border-width: 25px;
     border-radius: 5px;
     border-color: #000000;
-    width: 64px;
-    height: 64px;
-}
-
-#achievementcontainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    width: 48px;
+    height: 48px;
 }
 
 #achievementcontainer img {
@@ -151,8 +205,8 @@ body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer
     background-color: #4c4c4c;
     border-width: 25px;
     border-radius: 5px;
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
 }
 
 .woodbutton {
@@ -169,10 +223,44 @@ body, button, .sectionleft, .sectionmiddle, .sectionright, .fishcountercontainer
     background-image: url(img/woodbutton-active.png);
 }
 
+.seperatorleft {
+    width: 16px;
+    height: 100%;
+    background: url(img/stonedivv.png) repeat-y;
+    background: url(img/gradienttop.png) no-repeat top left,url(img/gradientbottom.png) no-repeat bottom left,url(img/stonedivv.png) repeat-y;
+    position: absolute;
+    left:30%;
+    top: 0px;
+    bottom: 0px;
+    z-index: 100;
+}
+
+.seperatorright {
+    width: 16px;
+    height: 100%;
+    background: url(img/stonedivv.png) repeat-y;
+    background: url(img/gradienttop.png) no-repeat top left,url(img/gradientbottom.png) no-repeat bottom left,url(img/stonedivv.png) repeat-y;
+    position: absolute;
+    right: 317px;
+    top: 0px;
+    bottom: 0px;
+    z-index: 100;
+}
+
+.sepatorbottom {
+    width: 100%;
+    height: 16px;
+    background: url(img/stonedivh.png) repeat-x;
+    background: url(img/gradientleft.png) no-repeat left top, url(img/gradientright.png) no-repeat right top,url(img/stonedivh.png) repeat-x;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+}
+
 body 
 {
     cursor: url(img/cursor.png), auto;
-    font-family: winn, Helvetica, sans-serif;
+    font-family: Georgia, Helvetica, sans-serif;
     font-size:32px;
     image-rendering: -moz-crisp-edges;
     image-rendering: -o-crisp-edges;
@@ -183,7 +271,7 @@ body
 
 button
 {
-    font-family: winn, Helvetica, sans-serif;
+    font-family: Georgia, Helvetica, sans-serif;
     font-size:32px;
     image-rendering: -moz-crisp-edges;
     image-rendering: -o-crisp-edges;
