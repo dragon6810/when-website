@@ -310,7 +310,6 @@ var display = {
     }
 };
 
-
     var particleslot = l('particles');
     var str;
     var particles = [];
@@ -361,14 +360,14 @@ var display = {
         }, 10);
         
         particleslot.innerHTML = '';
-
+ 
         for (i = 0; i < particlen; i++) {
             if (particles[i.img] !== 0) {
-            str = '<div class="particle" style="bottom:'+y+'px;right:'+x+'px;width:'+sx+'px;height:'+sy+'px; color:white;"><img src="img/'+img+'></div>'
+            str = '<div class="particle" style="bottom:'+y+'px;right:'+x+'px;width:64px;height:64px; color:white;"><img src="img/'+img+'></div>'
         } else if (particles[i.text] !== 0) {
             str = '<div class="particle" style="bottom:'+y+'px;right:'+x+'px;width:'+sx+'px;height:'+sy+'px; color:white">'+text+'</div>'
         }
-
+        
         particleslot.innerHTML += str;
         }
 
