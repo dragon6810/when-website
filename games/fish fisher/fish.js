@@ -236,27 +236,6 @@ var display = {
     }
 };
 
-class Particle {
-    constructor(x, y, size, image, weight, directionx, directiony, ctx) {
-        this.x = x;
-        this.y = y;
-        this.size = size,
-        this.image = image;
-        this.wight = weight;
-        this.directionx = directionx;
-        this.directiony = directiony;
-        this.ctx = ctx;
-    }
-
-    update() {
-        this.weight += 0.01;
-        this.y += this.weight;
-    }
-    draw() {
-        this.ctx.drawImage('img/'+this.image, this.x, this.y, this.size);
-    }
-}
-
 function savegame() {
     var gamesave = {
         fish: game.fish,
