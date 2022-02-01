@@ -316,14 +316,15 @@ var display = {
     var particlen = 50;
     var particle = {};
 
-    for (var i = 0; i < particlen; i++) {
-		particles[i] = {x:0,y:0,xd:0,yd:0,w:64,h:64,z:0,size:1,dur:2,life:-1,img:'firstfish.png'};
+    for (i = 0; i < particlen; i++) {
+		particles[i] = {x:0,y:0,xd:0,yd:0,w:64,h:64,z:0,size:1,dur:2,life:-1,img:'firstfish.png', text:'+'+game.clickvalue};
 	}
 
     updateparticles = function() {
-			for (var i=0;i<Game.particlesN;i++)
+			for (i = 0; i < particlen; i++)
 			{
-				var me=Game.particles[i];
+				var me = particles[i];
+                var mehtml = l('particle'+i);
 				if (me.life!=-1)
 				{
 					if (!me.text) me.yd+=0.2+Math.random()*0.1;
@@ -334,11 +335,14 @@ var display = {
 					{
 						me.life=-1;
 					}
+                    mehtml.style.left = (me.x + me.speedx) + 'px';
+                    mehtml.style.top = (me.y + me.speedy) + 'px';
 				}
+
 			}
 		}
 
-    makeparticle = function(x, y, scale, speedx, speedy, dur, img, text) {
+    makeparticle = function(x, y, size, speedx, speedy, dur, img, text) {
         for (var i = 0; i < particlen; i++) {
 			var me = particles[i];
 			if (me.life != -1)
@@ -352,6 +356,7 @@ var display = {
 					me.life=-1;
 				}
 			}
+            
 		}
 
         setInterval(function() {
@@ -362,25 +367,20 @@ var display = {
         particleslot.innerHTML = '';
  
         for (i = 0; i < particlen; i++) {
-            if (particles[i.img] !== 0) {
-            str = '<div class="particle" style="bottom:'+y+'px;right:'+x+'px;width:64px;height:64px; color:white;"><img src="img/'+img+'></div>'
-        } else if (particles[i.text] !== 0) {
-            str = '<div class="particle" style="bottom:'+y+'px;right:'+x+'px;width:'+sx+'px;height:'+sy+'px; color:white">'+text+'</div>'
+            particles[i].img = img;
+            particles[i].text = text;
+            if (particles[i].img !== 0) {
+                str = '<div class="particle '+i+'" id="particle'+i+'><img src="img/'+img+'"></div>';
+            }   else if (particles[i].text !== 0) {
+                str = '<div class="particle '+i+'" id="particle'+i+' style="color:white;">'+text+'</div>';
         }
-        
-        particleslot.innerHTML += str;
-        }
-
-        str = '';
-
-        for (i = 0; i < particlen; i++) {
-                particleslot.innerHTML += particles[i];
+                particleslot.innerHTML += str;
+                str = '';
         }
 
-        setInterval(function() {
-
-        }, dur);
     }
+
+    setInterval(updateparticles(), 10);
 
 function savegame() {
     var gamesave = {
@@ -445,7 +445,7 @@ function resetgame() {
 document.getElementById("clicker").addEventListener("click", function() {
     game.totalclicks++;
     game.addfish(game.clickvalue);
-    makeparticle(MouseX, MouseY, 1, 1, 0, -10, 1000, 0, '+'+game.clickvalue);
+    makeparticle(MouseX, MouseY, 1, 0, -10, 1000, 0, 0, '+'+game.clickvalue);
 }, false);
 
 window.onload = function() {
