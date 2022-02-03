@@ -16,16 +16,16 @@ body, button, div, shoph1, canvas {
 }
 
 .particle {
-    position: absolute;
     pointer-events: none;
     left: -200px;
     bottom: 0px;
-    width: 400px;
+    width: 100px;
     z-index: 100000000;
     text-align: center;
     text-shadow: 1px 1px 1px #000, 0px 0px 6px #000;
     color: white;
     font-size: 24px;
+    overflow: hidden;
 }
 
 .sectionleft {
@@ -64,13 +64,19 @@ body, button, div, shoph1, canvas {
 }
 
 .fishcountercontainer {
-    background-color: #111111aa;
-    color: #cccccc;
-    width: 75%;
-    border-radius: 1000px;
-    padding: 1px;
-    font-size: 24px;
-    font-weight: bold;
+    position: absolute;
+    left: 0px;
+    top: 10%;
+    width: 100%;
+    text-align: center;
+    z-index: 200;
+    background: #000;
+    background: rgba(0,0,0,0.4);
+    font-size: 28px;
+    text-shadow: 0px 0px 4px #000;
+    color: #fff;
+    padding: 2px 0px;
+    pointer-events: none;
 }
 
 .fishcountercontainer .fishpersecond {
@@ -88,6 +94,7 @@ body, button, div, shoph1, canvas {
 .clickercontainer img {
     cursor: url(img/finger.png), auto;
     position: relative;
+    top: 256px;
     transition: all .1s ease-in-out;
     filter: drop-shadow(0px 0px 20px #000000);
 }
@@ -110,10 +117,14 @@ shoph1 {
     width: 300px;
     height: 64px;
     cursor: url(img/finger.png), auto;
-    background: url("img/button.png");
+    background: url("img/shopbuttons.png");
     position: relative;
     font-size: 24px;
 }
+
+.shopbutton:nth-child(4n-3) {background-position:0px 64px;}
+.shopbutton:nth-child(4n-2) {background-position:0px 128px;}
+.shopbutton:nth-child(4n-1) {background-position:0px 192px;}
 
 .shopbutton #shopimage {
     width:64px;
@@ -180,12 +191,17 @@ shoph1 {
 }
 
 .shopbutton:hover {
-    background: url("img/buttonhover.png"), no-repeat;
+    box-shadow:0px 0px 16px #fff inset,0px 0px 1px #000;
+	z-index:20;
+	filter:brightness(115%);
+	-webkit-filter:brightness(115%);
 }
 
 .shopbutton:active {
-    cursor: url(img/cursor.png), auto;
-    background: url("img/buttonpressed.png"), no-repeat;
+    box-shadow:0px 0px 16px #000 inset,0px 0px 1px #000;
+	z-index:20;
+	filter:brightness(85%);
+	-webkit-filter:brightness(85%);
 }
 
 #upgradecontainer img {

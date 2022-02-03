@@ -35,12 +35,7 @@ var game = {
 // shortcuts
 function choose(arr) {return arr[Math.floor(Math.random()*arr.length)];}
 function l(what) {return document.getElementById(what);}
-
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min);
-  }
+function getRandomInt(min, max) {min = Math.ceil(min);max = Math.floor(max);return Math.floor(Math.random() * (max - min) + min);}
 
 var building = {
     name: [
@@ -275,36 +270,36 @@ var building = {
 
 var display = {
     updatefish: function() {
-        document.getElementById("fish").innerHTML = abbreviatenum((Math.floor(game.fish))) + "<p></p>";
-        document.getElementById("fishpersecond").innerHTML = game.getfishpersecond();
+        l("fish").innerHTML = abbreviatenum((Math.floor(game.fish))) + "<br>";
+        l("fishpersecond").innerHTML = game.getfishpersecond();
         document.title = "Fish Fisher - " + abbreviatenum((Math.floor(game.fish))) + " Fish";
     },
 
     updateshop: function() {
-        document.getElementById("shopcontainer").innerHTML = '<center><shoph1>Shop</shoph1></center> <p></p> <div class="separatorbottom"></div>';
+        l("shopcontainer").innerHTML = '<center><shoph1>Shop</shoph1></center> <p></p> <div class="separatorbottom"></div>';
         for (i = 0; i < building.name.length; i++) {
-            document.getElementById("shopcontainer").innerHTML += '<div class="shopbutton unselectable" onclick="building.purchase('+i+')"><div id="shopimage"><img src="img/'+building.image[i]+'"> &#10;</div><div id="content"><div id="name">'+building.name[i]+'</div><div id="cost"><span>'+building.cost[i]+'</span> Fish</div><div id="amount"><span>'+building.count[i]+'</span></div></div></div>';
+            l("shopcontainer").innerHTML += '<div class="shopbutton unselectable" onclick="building.purchase('+i+')"><div id="shopimage"><img src="img/'+building.image[i]+'"> &#10;</div><div id="content"><div id="name">'+building.name[i]+'</div><div id="cost"><span>'+building.cost[i]+'</span> Fish</div><div id="amount"><span>'+building.count[i]+'</span></div></div></div>';
         }
     },
 
     updateupgrades: function() {
-        document.getElementById("upgradecontainer").innerHTML = "<center><shoph1>Upgrades</shoph1></center> <p></p>";
+        l("upgradecontainer").innerHTML = "<center><shoph1>Upgrades</shoph1></center> <p></p>";
         for (i = 0; i < upgrade.name.length; i++) {
             if (!upgrade.purchased[i]) {
                 if (upgrade.type[i] == "building" && building.count[upgrade.buildingindex[i]] >= upgrade.requirement[i]) {
-                    document.getElementById("upgradecontainer").innerHTML += '<img src="img/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' fish)" onclick="upgrade.purchase('+i+')">';
+                    l("upgradecontainer").innerHTML += '<img src="img/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' fish)" onclick="upgrade.purchase('+i+')">';
                 } else if (upgrade.type[i] == "click" && game.totalclicks >= upgrade.requirement[i]) {
-                    document.getElementById("upgradecontainer").innerHTML += '<img src="img/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' fish)" onclick="upgrade.purchase('+i+')">';
+                    l("upgradecontainer").innerHTML += '<img src="img/'+upgrade.image[i]+'" title="'+upgrade.name[i]+' &#10; '+upgrade.description[i]+' &#10; ('+upgrade.cost[i]+' fish)" onclick="upgrade.purchase('+i+')">';
                 }
             }
         }
     },
 
     updateachievements: function() {
-        document.getElementById("achievementcontainer").innerHTML = "<center><shoph1>Achievements</shoph1></center> <p></p>";
+        l("achievementcontainer").innerHTML = "<center><shoph1>Achievements</shoph1></center> <p></p>";
         for (i = 0; i < achievement.name.length; i++) {
             if (achievement.awarded[i]) {
-                document.getElementById("achievementcontainer").innerHTML += '<img src="img/'+achievement.image[i]+'" title="'+achievement.name[i]+' &#10; '+achievement.description[i]+'"> &#10;'
+                l("achievementcontainer").innerHTML += '<img src="img/'+achievement.image[i]+'" title="'+achievement.name[i]+' &#10; '+achievement.description[i]+'"> &#10;'
             }
         }
     }
@@ -328,8 +323,8 @@ var display = {
 				if (me.life!=-1)
 				{
 					if (!me.text) me.yd+=0.2+Math.random()*0.1;
-					me.x+=me.xd;
-					me.y+=me.yd;
+					me.x+=(innerWidth / me.xd) * 10;
+					me.y+=(innerHeight / me.yd) * 10;
 					me.life++;
 					if (me.life>=Game.fps*me.dur)
 					{
@@ -358,11 +353,6 @@ var display = {
 			}
             
 		}
-
-        setInterval(function() {
-            x += (innerWidth / speedx) * 10;
-            y += (innerHeight / speedy) * 10;
-        }, 10);
         
         particleslot.innerHTML = '';
  
@@ -372,7 +362,7 @@ var display = {
             if (particles[i].img !== 0) {
                 str = '<div class="particle '+i+'" id="particle'+i+'><img src="img/'+img+'"></div>';
             }   else if (particles[i].text !== 0) {
-                str = '<div class="particle '+i+'" id="particle'+i+' style="color:white;">'+text+'</div>';
+                str = '<div class="particle '+i+'" id="particle'+i+'" style="color:white;">'+text+'</div>';
         }
                 particleslot.innerHTML += str;
                 str = '';
@@ -442,10 +432,10 @@ function resetgame() {
     }
 }
 
-document.getElementById("clicker").addEventListener("click", function() {
+l("clicker").addEventListener("click", function() {
     game.totalclicks++;
     game.addfish(game.clickvalue);
-    makeparticle(MouseX, MouseY, 1, 0, -10, 1000, 0, 0, '+'+game.clickvalue);
+    makeparticle(MouseX, MouseY, 1, 0, -10, 1000, 0, '+'+game.clickvalue);
 }, false);
 
 window.onload = function() {
@@ -471,8 +461,8 @@ setInterval(function() {
         else if (achievement.type[i] == "click" && game.totalclicks >= achievement.requirement[i]) achievement.earn(i);
         else if (achievement.type[i] == "building" && building.count[achievement.objectindex[i]] >= achievement.requirement[i]) achievement.earn(i);
     }
-    game.fish += game.getfishpersecond() / 100;
-    game.totalfish += game.getfishpersecond() / 100;
+    game.fish += (game.getfishpersecond() / 100);
+    game.totalfish += (game.getfishpersecond() / 100);
     display.updatefish();
     display.updateachievements();
 }, 10);
