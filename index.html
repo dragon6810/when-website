@@ -1,16 +1,98 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>W.H.E.N. 6th Grade</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script src="main.js"></script>
-    </head>
-    <body>
-        <h1>W.H.E.N.</h1>
-        <p>Worthington Hooker Everyweek News</p>
-    </body>
-    <div class="tabs-box">
-        <a class="button" onclick="page.switchpage(0)">Home</a> - <a class="button" href="discuss.html">Discussion</a> - <a class="button" onclick="page.switchpage(2)">Polls</a> - <a class="button" onclick="page.switchpage(3)">Science</a> - <a class="button" onclick="page.switchpage(4)">Social Studies</a> - <a class="button" onclick="page.switchpage(5)">Math</a> - <a class="button" onclick="page.switchpage(6)">Reading</a> - <a class="button" onclick="page.switchpage(7)">Specials</a> - <a class="button" onclick="page.switchpage(8)">Archives</a> - <a class="button" onclick="page.switchpage(9)">Games</a> - <a class="button" onclick="toggleTheme();">Toggle Theme</a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>W.H.E.N. 6th Grade</title>
+</head>
+<body>
+    <header class="header">
+        <button class="menu-icon-btn" data-menu-icon-btn>
+            <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24">
+                <rect x="0" y="4" width="24" height="3"/>
+                <rect x="0" y="10" width="24" height="3"/>
+                <rect x="0" y="16" width="24" height="3"/>
+            </svg>
+        </button>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="sidebar-list">
+                <li class="sidebar-list-item">
+                    <a href="#" class="sidebar-link">
+                        <svg class="sidebar-icon" viewBox="0 0 32 32">
+                            <path d="M0, 32 L0, 16 L16, 3 L32, 16 L32, 32"/>
+                            <path d="M0, 14.4 L0, 12 L16, 0 L32, 12 L32, 14.4 L16, 2"/>
+                        </svg>
+                        <div class="hidden-sidebar">Home</div>
+                    </a>
+                </li>
+                <li class="sidebar-list-item">
+                    <a href="#" class="sidebar-link">
+                        <svg class="sidebar-icon" viewBox="0 0 32 32">
+                            <defs>
+                            <mask id="inner">
+                                <rect fill="white" x="0" y="0" width="32" height="32"/>
+                                <path fill="black" d="
+                                    M2, 16
+                                    C2, 8.3 8.3, 2 16, 2
+                                    C23.7, 2 30, 8.3 30, 16
+                                    C30, 23.7 23.7, 30 16, 30
+                                    C8.3, 30 2, 23.7 2, 16
+                                "/>
+                            </mask>
+                            <mask id="onlyinner">
+                                <rect fill="black" x="0" y="0" width="32" height="32"/>
+                                <path fill="white" d="
+                                    M2, 16
+                                    C2, 8.3 8.3, 2 16, 2
+                                    C23.7, 2 30, 8.3 30, 16
+                                    C30, 23.7 23.7, 30 16, 30
+                                    C8.3, 30 2, 23.7 2, 16
+                                "/>
+                            </mask>
+                            </defs>
+                                <path d="
+                                    M0, 16 
+                                    C0, 7.2 7.2, 0 16, 0 
+                                    C24.8, 0 32, 7.2 32, 16
+                                    C32, 24.8 24.8, 32 16, 32
+                                    C7.2, 32 0, 24.8 0, 16
+                                " mask="url(#inner)"/>
+                                <path d="
+                                M18 19
+                                C18, 14 25, 14 C5, 14
+                                C0, 18 32, 18 32, 18
+                                C
+                                " mask="url(#inner)"/>
+                        </svg>
+                        <div class="hidden-sidebar">Home</div>
+                    </a>
+                </li>
+                <li class="sidebar-list-item">
+                    <a href="#" class="sidebar-link">
+                        <svg class="sidebar-icon" viewBox="0 0 32 32">
+                            <path d="
+                                M3, 32
+                                C1, 30 8, 23 13, 15
+                                C21, 7 14, 6 13, 5
+                                L10, 2.5
+                                L13, 0
+                                L19, 0
+                                L22, 2.5
+                                L19, 5
+                                L19, 15
+                                L29, 32
+                            "/>
+                        </svg>
+                        <div class="hidden-sidebar">Home</div>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        <main class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet odit ea quo at iure reprehenderit, mollitia fugiat est esse explicabo natus maxime laudantium expedita accusantium tenetur harum unde deserunt sit, delectus fugit possimus. Minima dolores ipsam quod vel amet pariatur labore, cumque officiis corrupti inventore incidunt in asperiores? Maiores tempore esse earum, unde exercitationem sint, animi beatae aut dolor error dignissimos! Id cupiditate esse aliquid, recusandae quibusdam omnis! Quaerat quis distinctio provident velit, voluptas cum dolor fuga officiis sunt voluptatum. Quas velit corporis unde dolorum nam, at rem eos sequi nesciunt accusantium cupiditate non blanditiis officiis aliquid facilis! Asperiores nemo odio facere eius beatae consequuntur at laudantium architecto in tempora necessitatibus quidem, dolorum praesentium, minus veritatis alias odit fuga doloremque reiciendis obcaecati, ullam eligendi! Eos aspernatur dolorem blanditiis optio repudiandae autem atque beatae est. Dignissimos, eius earum. Quidem corporis est id sed quos, iste repellendus laborum ab ullam beatae tenetur fugit temporibus quae? Culpa molestiae vitae eaque animi doloremque beatae amet exercitationem quam saepe tempora est quasi inventore, totam laborum cupiditate corporis obcaecati provident perferendis ab voluptatem repudiandae doloribus porro? Sed at recusandae similique nesciunt vero dicta voluptatum laudantium nemo veritatis error. Necessitatibus, quod temporibus rem quo ut laboriosam debitis quasi ipsum in saepe fugiat consequuntur quis optio non amet ea pariatur? Corrupti eum, alias et fugit perspiciatis laudantium ab magni? Ratione debitis nihil dolore voluptas soluta veniam mollitia obcaecati, asperiores neque aut ipsam quod fuga unde voluptates nemo! Ratione temporibus at eius ad in autem mollitia nemo, perferendis voluptates odio est qui aut porro beatae optio veritatis? Veniam commodi omnis sapiente quasi ab amet labore perferendis libero ipsa! Optio nostrum, corrupti inventore voluptatem provident laborum facilis assumenda culpa consectetur quos? Sunt quibusdam obcaecati dolores aut, a nesciunt quo vero enim maiores soluta, nemo sit! Nisi totam assumenda, voluptatem eius sequi atque saepe adipisci deleniti necessitatibus, magnam quo iusto molestias ipsam et asperiores sapiente debitis suscipit vero excepturi quasi! Esse magni omnis a ad quo vel repellendus, sunt repudiandae id hic architecto est in qui harum quidem mollitia dicta corrupti necessitatibus minus aspernatur officia illum nemo? Excepturi provident quisquam a numquam natus quo, fugiat voluptates, fugit sint nemo error, atque voluptas amet quia? Repudiandae provident velit corrupti molestiae quis doloremque veniam modi, sint laudantium est nostrum tempore sapiente voluptates dolores id cumque soluta molestias. Ea alias laborum nam a minus corrupti vitae deleniti cum iste error sunt repellat possimus modi atque dignissimos quidem reprehenderit numquam blanditiis, dolore voluptas! Corrupti deserunt ipsa nam, officia hic impedit ducimus tenetur, nesciunt dolorum rem quisquam quia. Provident distinctio sapiente suscipit ullam tempora tenetur aliquid qui laudantium minima? Aperiam atque quidem vero vitae modi rem. Fugiat cupiditate obcaecati reiciendis animi ab nostrum quaerat deleniti doloremque. Mollitia et accusantium molestiae voluptatibus dolor iure ab, alias necessitatibus illum! Aliquid harum perferendis minus quos rerum consequuntur suscipit quis. Magnam velit sed pariatur minus perferendis fuga, repudiandae ea assumenda beatae dolorum nam eaque quibusdam distinctio eum mollitia veritatis numquam quos accusamus qui eligendi quam temporibus quasi. Dolores numquam recusandae praesentium dicta eum necessitatibus, magni, aspernatur perferendis ratione voluptas ex illo! Laborum, vel, quas fugiat nesciunt ad iste nisi placeat repellendus nulla accusamus beatae, ex omnis. Autem consectetur fugit quis! Ullam quisquam asperiores harum repellat velit odio ipsa, numquam voluptatibus eligendi? Commodi deleniti maxime iure dolorem voluptas doloremque pariatur nisi. Sed nesciunt, sint optio voluptatibus animi aliquid molestias nostrum neque voluptates, quasi officia error labore distinctio quisquam aliquam laboriosam perspiciatis ex cum, corporis non iure! Saepe nisi sint sed minus nesciunt enim labore, excepturi expedita omnis possimus eum, culpa sunt assumenda quos cum ipsam obcaecati eos porro maiores vel in. Quasi similique magni doloribus minima fugit vero consequatur dignissimos autem rerum maxime, cumque eveniet illo, consequuntur provident error saepe? Vero, sit hic? Molestias repellat unde a facere non ad incidunt, laudantium voluptatibus ea distinctio modi, voluptas, reiciendis optio iste nulla officiis illum nisi sit ducimus debitis! Dolorum cupiditate libero sapiente debitis, exercitationem minus itaque quia accusamus quo quidem architecto reprehenderit eum illo modi nobis expedita. Molestias illo impedit iusto dignissimos reprehenderit eveniet repellat fugit explicabo suscipit similique. Quo itaque, totam modi aliquam est perferendis ipsam, unde placeat beatae nam voluptate consequatur sunt! Officia voluptas inventore dolore eveniet! Architecto aliquam, mollitia possimus eum eos laudantium exercitationem quos quia? Inventore fuga quia porro officiis quam ipsum, itaque tempora libero minima vel veniam illo dignissimos mollitia voluptates voluptatem reiciendis eveniet? Iure ex cumque in at similique aperiam ab quo unde itaque est quae maiores inventore, reiciendis adipisci, nostrum quasi illo! Quo sapiente natus in, tenetur molestias odio maxime deleniti voluptatibus neque veritatis vero autem ex aperiam tempore, quis saepe ut eaque est laborum? Placeat eveniet corrupti at maxime architecto culpa minima saepe dolor, atque incidunt numquam sunt unde non nemo, eum consequuntur magni exercitationem quo praesentium, cum debitis. Accusamus dicta accusantium animi similique. Vero odit quidem commodi incidunt a recusandae nihil nemo quisquam, voluptatem voluptates id soluta tempore iusto deserunt praesentium qui ex accusantium earum, ad facilis labore obcaecati omnis et non. Est, a officia unde consequuntur cumque assumenda id harum magni nulla non voluptate molestias accusantium. In labore explicabo commodi voluptatum modi quia magni fugiat omnis voluptas molestiae, suscipit repudiandae cum quod exercitationem totam ipsam corporis, rerum fugit nihil vero. Magnam ut sint aut quod doloremque praesentium incidunt dolore perferendis velit. Eos quod labore, sunt, accusamus odit aspernatur veritatis quos itaque provident minima nostrum. Eius, nostrum? Maxime facere id, inventore ad necessitatibus nemo est enim sequi molestias provident commodi deserunt cumque, atque fugit? Harum at in repellat. Accusamus deleniti consectetur possimus ab aspernatur minus iusto modi debitis harum voluptate repellat totam, rerum fugiat obcaecati officia. In quos quis inventore at, earum enim ab numquam magnam eos modi veritatis temporibus assumenda, molestiae laborum dolor, consequuntur omnis! Earum sit, ut architecto quod quos explicabo sunt, eligendi totam quae consectetur magnam. Quibusdam nisi esse eaque odit earum culpa numquam obcaecati iure sequi omnis! Sapiente beatae illum aut repellat esse? Tempora unde maxime quam odio debitis nam dolore, corporis, natus officiis non laudantium ut. Doloribus, laborum.</main>
     </div>
-    <div class="flex-box" id="content"></div>
+</body>
 </html>
