@@ -1,3 +1,8 @@
+body, div, html, canvas {
+    margin: 0;
+    padding: 0;
+}
+
 .bigbagel {
     background: url(img/bigbagel.png) center;
     background-size: 100%;
@@ -7,8 +12,17 @@
     height: 256px;
 }
 
+.sectionleft {
+    width: 30%;
+    right: 0;
+    top: 0;
+    bottom: 100%;
+    left: 30%;
+}
+
 #backgroundCanvas {
     position: absolute;
     left: 0px;
     top: 0px;
+    z-index: -1;
 }
