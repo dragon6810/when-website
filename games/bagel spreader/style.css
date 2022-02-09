@@ -12,6 +12,12 @@ body, div, html, canvas {
     height: 256px;
 }
 
+#bagelAnchor {
+    position: absolute;
+    left: 50%;
+    top:40%;
+}
+
 .sectionleft {
     width: 30%;
     right: 0;

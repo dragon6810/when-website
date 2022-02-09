@@ -30,23 +30,40 @@ Game.bg.onload=function() {
     Game.background.fillPattern(Game.bg,0,0,Game.background.canvas.width,Game.background.canvas.height,window.innerHeight,window.innerHeight,0,0);
 }
 
-Game.bagelScale=1;
-Game.bagelSize=256 * Game.bagelScale;
+bigbagel=l('bigbagel');
 
-wobblein=function() {
-    var wobbletime=0;
-    var freq=2*Math.PI/5;
-    var decay=1.0;
+Game.bagelScale=1;
+Game.bagelSize=256*Game.bagelScale;
+
+bigbagel.addEventListener('mouseover', function(e) {
+    wobble();
+}, false)
+
+bigbagel.addEventListener('click', function() {
+    wobble();
+})
+
+bigbagel.style.position='absolute';
+        bigbagel.style.left=l('bagelAnchor').getBoundingClientRect().left-(Game.bagelSize/2)+'px';
+        bigbagel.style.top=l('bagelAnchor').getBoundingClientRect().top-(Game.bagelSize/2)+'px';
+
+wobble=function() {
+    var wobbletime;
+    var freq;
+    var decay;
+    wobbletime=0;
+    freq=2*Math.PI/10;
+    decay=0.25;
     setInterval(function() {
+        bigbagel.style.position='absolute';
+        bigbagel.style.left=l('bagelAnchor').getBoundingClientRect().left-(Game.bagelSize/2)+'px';
+        bigbagel.style.top=l('bagelAnchor').getBoundingClientRect().top-(Game.bagelSize/2)+'px';
         if (Math.exp(-decay*wobbletime > 0.01)) {
         Game.bagelScale=1+0.25*Math.cos(freq*wobbletime)*Math.exp(-decay*wobbletime);
         wobbletime++;
         }
     }, 33);
-}
-
-wobbleout=function() {
-
+    console.log(l('bagelAnchor').style.left);
 }
 
 setInterval(function() {
