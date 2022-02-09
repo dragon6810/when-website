@@ -1,0 +1,14 @@
+.bigbagel {
+    background: url(img/bigbagel.png) center;
+    background-size: 100%;
+    cursor: pointer;
+    border-radius: 1000px;
+    width: 256px;
+    height: 256px;
+}
+
+#backgroundCanvas {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
