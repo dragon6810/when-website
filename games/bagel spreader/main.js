@@ -4,17 +4,63 @@ var Game={};
 l=function(what) {return document.getElementById(what);};
 choose=function(array) {return array[Math.floor(Math.random()*array.length)];};
 
+Game.bagels=0;
+Game.bagelsPerSecond=0;
+Game.clickingPower=1;
+
+Game.clickBagel=function() {
+    Game.bagels+=Game.clickingPower;
+    Game.updateDisplay();
+}
+
+Game.updateDisplay=function() {
+    l('data').innerHTML='Bagels: '+Game.bagels+'<br>Bagels per second: '+Game.bagelsPerSecond;
+    bigbagel.style.left=l('bagelAnchor').getBoundingClientRect().left-(Game.bagelSize/2)+'px';
+    bigbagel.style.top=l('bagelAnchor').getBoundingClientRect().top-(Game.bagelSize/2)+'px';
+    l('wrapper').setAttribute('width:',window.innerWidth+'px');
+}
+
+Game.buildings=[];
+Game.makeBuilding=function(id, name, offsx, offsy, cps, cost, requirement) {
+    var building = {id:id, name:name, offsx:offsx, offsy:offsy, cps:cps, cost:cost, requirement:requirement, amount:0,earned:false};
+    Game.buildings.push(building);
+}
+
+//Making buildings
+Game.makeBuilding('toaster','Toaster', 0, 0, 1, 10, 5);
+
+setInterval(function() {
+    Game.updateDisplay();
+}, 100);
+
+Game.updateBuildings=function() {
+    Game.shop=l('shop');
+    var str='<div class="title">Shop</div>';
+    for (var i=0;i<Game.buildings.length;i++) {
+        var me=Game.buildings[i];
+        str+='<div id="shopbutton"><div id="shopimg" style="width:64px;height:64px;background:url(img/buildings.png) '+me.offsx+' '+me.offsy+';"</div><div id="content"><div id="name>'+me.name+'</div><div id="cost"><img src="img/tinybagel.png>'+me.cost+' Bagels</div><div id="amount">'+me.amount+'"</div></div></div>'
+    }
+    Game.shop.innerHTML=str;
+    str='';
+}
+
+Game.leftBackground=l('leftCanvas').getContext('2d');
+Game.leftBackground.canvas.width=window.innerWidth/3;
+Game.leftBackground.canvas.height=window.innerHeight;
+
 Game.backgroundImage='img/background.png';
 Game.bg=new Image();
 Game.bg.src=Game.backgroundImage;
 Game.background=l('backgroundCanvas').getContext('2d');
-Game.background.canvas.width=window.innerWidth
-Game.background.canvas.height=window.innerHeight
+Game.background.canvas.width=window.innerWidth;
+Game.background.canvas.height=window.innerHeight;
 
 window.addEventListener('resize', function(event) {
     Game.background.canvas.width=window.innerWidth
     Game.background.canvas.height=window.innerHeight
     Game.background.fillPattern(Game.bg,0,0,Game.background.canvas.width,Game.background.canvas.height,window.innerHeight,window.innerHeight,0,0);
+    Game.leftBackground.canvas.width=window.innerWidth/3;
+    Game.leftBackground.canvas.height=window.innerHeight;
 });
 
 CanvasRenderingContext2D.prototype.fillPattern=function(img,X,Y,W,H,iW,iH,offX,offY)
@@ -36,11 +82,11 @@ Game.bagelScale=1;
 Game.bagelSize=256*Game.bagelScale;
 
 bigbagel.addEventListener('mouseover', function(e) {
-    wobble();
+    //wobble();
 }, false)
 
 bigbagel.addEventListener('click', function() {
-    wobble();
+    Game.clickBagel();
 })
 
 bigbagel.style.position='absolute';
@@ -48,23 +94,25 @@ bigbagel.style.position='absolute';
         bigbagel.style.top=l('bagelAnchor').getBoundingClientRect().top-(Game.bagelSize/2)+'px';
 
 wobble=function() {
+    clearInterval(wobbling);
     var wobbletime;
     var freq;
     var decay;
     wobbletime=0;
     freq=2*Math.PI/10;
     decay=0.25;
-    setInterval(function() {
+    var wobbling = setInterval(function() {
         bigbagel.style.position='absolute';
         bigbagel.style.left=l('bagelAnchor').getBoundingClientRect().left-(Game.bagelSize/2)+'px';
         bigbagel.style.top=l('bagelAnchor').getBoundingClientRect().top-(Game.bagelSize/2)+'px';
-        if (Math.exp(-decay*wobbletime > 0.01)) {
+        if (Math.exp(-decay*wobbletime > 1)) {
         Game.bagelScale=1+0.25*Math.cos(freq*wobbletime)*Math.exp(-decay*wobbletime);
         wobbletime++;
-        }
+        } else clearInterval(wobbling);
     }, 33);
-    console.log(l('bagelAnchor').style.left);
 }
+
+window.addEventListener('resize', Game.updateDisplay());
 
 setInterval(function() {
     Game.bagelSize=256*Game.bagelScale;
