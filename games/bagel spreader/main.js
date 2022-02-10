@@ -18,11 +18,12 @@ Game.updateDisplay=function() {
     bigbagel.style.left=l('bagelAnchor').getBoundingClientRect().left-(Game.bagelSize/2)+'px';
     bigbagel.style.top=l('bagelAnchor').getBoundingClientRect().top-(Game.bagelSize/2)+'px';
     l('wrapper').setAttribute('width:',window.innerWidth+'px');
+    Game.updateBuildings();
 }
 
 Game.buildings=[];
 Game.makeBuilding=function(id, name, offsx, offsy, cps, cost, requirement) {
-    var building = {id:id, name:name, offsx:offsx, offsy:offsy, cps:cps, cost:cost, requirement:requirement, amount:0,earned:false};
+    var building = {id:id, name:name, offsx:offsx, offsy:offsy, cps:cps, cost:cost, requirement:requirement, amount:0};
     Game.buildings.push(building);
 }
 
@@ -30,18 +31,56 @@ Game.makeBuilding=function(id, name, offsx, offsy, cps, cost, requirement) {
 Game.makeBuilding('toaster','Toaster', 0, 0, 1, 10, 5);
 
 setInterval(function() {
-    Game.updateDisplay();
+    //Game.updateDisplay();
 }, 100);
 
 Game.updateBuildings=function() {
-    Game.shop=l('shop');
-    var str='<div class="title">Shop</div>';
+    var str='<div id="title">Shop</div>';
     for (var i=0;i<Game.buildings.length;i++) {
         var me=Game.buildings[i];
-        str+='<div id="shopbutton"><div id="shopimg" style="width:64px;height:64px;background:url(img/buildings.png) '+me.offsx+' '+me.offsy+';"</div><div id="content"><div id="name>'+me.name+'</div><div id="cost"><img src="img/tinybagel.png>'+me.cost+' Bagels</div><div id="amount">'+me.amount+'"</div></div></div>'
+        str+='<div id="shopbutton"><div id="'+me.id+'"<div id="shopimg '+me.id+'" style="background:url(img/bigbagel.png) '+me.offsx+' '+me.offsy+';background-size:64px 64px;"</div></div><div id="content"><div id="name">'+me.name+'</div><div id="cost"><img src="img/tinybagel.png">'+me.cost+'</div><div id="amount">'+me.amount+'</div></div></div>'
     }
-    Game.shop.innerHTML=str;
+    l('shop').innerHTML=str;
     str='';
+}
+
+Game.buyMode=1;
+
+if (l('shopbutton')) {
+l('shopbutton').addEventListener('click', function() {
+    for (i=0; i<buildings.length; i++) {
+        var me=buildings[i];
+        if (l(me.id)) {
+            Game.buildingSys.buy(me.id, Game.buyMode);
+            updateBuildings();
+        }
+    }
+}, false)
+}
+
+Game.buildingSys={
+    buy: function(what, amount) {
+        for (i=0; i<buildings.length; i++) {
+            var me = buildings[i];
+            if (what=me.id && Game.bagels>=me.cost) {
+                me.amount+=amount;
+                for (i=0; i<me.amount; i++) {
+                    me.cost*=1.15;
+                }
+            }
+        }
+    },
+    free: function(what, amount) {
+        for (i=0; i<buildings.length; i++) {
+            var me = buildings[i];
+            if (what=me.id) {
+                me.amount+=amount;
+                for (i=0; i<me.amount; i++) {
+                    me.cost*=1.15;
+                }
+            }
+        }
+    }
 }
 
 Game.leftBackground=l('leftCanvas').getContext('2d');
@@ -120,11 +159,11 @@ setInterval(function() {
     l('bigbagel').style.height = Game.bagelSize + 'px';
 }, 33)
 
-console.log('[=='+
+console.log('[== '+
             choose(
                 ['Hello there.',
                 'Musty Crusty moldy cream cheese',
                 'Dont cheat plz ._.',
                 'I hope yees find de bug',
                 'Hows your day?']
-            )+'==]');
+            )+' ==]');

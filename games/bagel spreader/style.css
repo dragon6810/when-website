@@ -18,6 +18,67 @@ body, div, html, canvas {
     top:40%;
 }
 
+#shopbutton {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    width: 256px;
+    height: 64px;
+    background: url(img/button.png);
+    transition: 0.1s;
+}
+
+#shopbutton:hover {
+    filter: brightness(115%);
+    box-shadow: inset 0 0 10px #ffffffc2;
+}
+
+#shopbutton:active {
+    filter: brightness(85%);
+    box-shadow: inset 0 0 10px #000000c2;
+}
+
+#title {
+    text-align: center;
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: #fff 0 0 10px;
+}
+
+#content {
+    display: inline-block;
+    position: absolute;
+    left: 64px;
+    top: 6px;
+    right: 0px;
+    bottom: 6px;
+}
+
+#cost {
+    position: absolute;
+    bottom: 0;
+}
+
+#amount {
+    font-size: 50px;
+    position: absolute;
+    color: #525252a6;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+#name {
+    color: #fff;
+    font-size: 1.5rem;
+    text-shadow: #fff 0 0 10px;
+}
+
+#shopimg {
+    width: 64px;
+    height: 64px;
+}
+
 #separatorLeft {
     position: absolute;
     left: 30%;
